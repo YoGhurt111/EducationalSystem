@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - education_administration@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="education_administration">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="ddz"/>
+    <schema id="3" name="elective_system_v1"/>
+    <schema id="4" name="information_schema"/>
+    <schema id="5" name="jsp"/>
+    <schema id="6" name="mysql"/>
+    <schema id="7" name="performance_schema"/>
+    <schema id="8" name="pvsystem"/>
+    <schema id="9" name="school"/>
+    <schema id="10" name="sys"/>
+    <table id="11" parent="1" name="admin"/>
+    <table id="12" parent="1" name="course"/>
+    <table id="13" parent="1" name="department"/>
+    <table id="14" parent="1" name="offered_course"/>
+    <table id="15" parent="1" name="student"/>
+    <table id="16" parent="1" name="teacher"/>
+    <column id="17" parent="11" name="id">
+      <mandatory>1</mandatory>
+      <data-type>char(4)|0</data-type>
+    </column>
+    <column id="18" parent="11" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="19" parent="11" name="password">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="20" parent="11" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="21" parent="12" name="id">
+      <mandatory>1</mandatory>
+      <data-type>char(6)|0</data-type>
+    </column>
+    <column id="22" parent="12" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="23" parent="12" name="credit">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="24" parent="12" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="25" parent="13" name="id">
+      <mandatory>1</mandatory>
+      <data-type>char(2)|0</data-type>
+    </column>
+    <column id="26" parent="13" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="27" parent="13" name="location">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="28" parent="13" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="29" parent="14" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="30" parent="14" name="course_id">
+      <mandatory>1</mandatory>
+      <data-type>char(6)|0</data-type>
+    </column>
+    <column id="31" parent="14" name="teacher_id">
+      <mandatory>1</mandatory>
+      <data-type>char(10)|0</data-type>
+    </column>
+    <column id="32" parent="14" name="term">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="33" parent="14" name="course_location">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="34" parent="14" name="course_time">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="35" parent="14" name="capacity">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="36" parent="14" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="37" parent="15" name="id">
+      <mandatory>1</mandatory>
+      <data-type>char(8)|0</data-type>
+    </column>
+    <column id="38" parent="15" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="39" parent="15" name="password">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="40" parent="15" name="department_id">
+      <mandatory>1</mandatory>
+      <data-type>char(2)|0</data-type>
+    </column>
+    <key id="41" parent="15" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="42" parent="16" name="id">
+      <mandatory>1</mandatory>
+      <data-type>char(10)|0</data-type>
+    </column>
+    <column id="43" parent="16" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="44" parent="16" name="password">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="45" parent="16" name="department_id">
+      <mandatory>1</mandatory>
+      <data-type>char(2)|0</data-type>
+    </column>
+    <key id="46" parent="16" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>
