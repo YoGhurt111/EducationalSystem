@@ -1,8 +1,11 @@
 package com.shu.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Dell on 2017/4/9.
@@ -17,6 +20,7 @@ public class OfferedCourse {
     private String courseLocation;
     private String courseTime;
     private int capacity;
+    private Set<Student> studentSet = new HashSet<Student>();
 
     @Id
     public int getId() {
@@ -27,6 +31,7 @@ public class OfferedCourse {
         this.id = id;
     }
 
+    @Column(name = "course_id")
     public String getCourseId() {
         return courseId;
     }
@@ -35,6 +40,7 @@ public class OfferedCourse {
         this.courseId = courseId;
     }
 
+    @Column(name = "teacher_id")
     public String getTeacherId() {
         return teacherId;
     }
@@ -51,6 +57,7 @@ public class OfferedCourse {
         this.term = term;
     }
 
+    @Column(name = "course_location")
     public String getCourseLocation() {
         return courseLocation;
     }
@@ -59,6 +66,7 @@ public class OfferedCourse {
         this.courseLocation = courseLocation;
     }
 
+    @Column(name = "course_time")
     public String getCourseTime() {
         return courseTime;
     }
@@ -104,5 +112,13 @@ public class OfferedCourse {
         result = 31 * result + (courseTime != null ? courseTime.hashCode() : 0);
         result = 31 * result + capacity;
         return result;
+    }
+
+    public Set<Student> getStudentSet() {
+        return studentSet;
+    }
+
+    public void setStudentSet(Set<Student> studentSet) {
+        this.studentSet = studentSet;
     }
 }

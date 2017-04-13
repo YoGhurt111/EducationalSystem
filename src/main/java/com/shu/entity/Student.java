@@ -1,8 +1,8 @@
 package com.shu.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Dell on 2017/4/9.
@@ -14,8 +14,10 @@ public class Student {
     private String name;
     private String password;
     private String departmentId;
+    private Set<OfferedCourse> offeredCourseSet = new HashSet<OfferedCourse>();
 
     @Id
+
     public String getId() {
         return id;
     }
@@ -40,6 +42,7 @@ public class Student {
         this.password = password;
     }
 
+    @Column(name = "department_id")
     public String getDepartmentId() {
         return departmentId;
     }
@@ -71,5 +74,19 @@ public class Student {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (departmentId != null ? departmentId.hashCode() : 0);
         return result;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "grade",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "offered_course_id")
+    )
+    public Set<OfferedCourse> getOfferedCourseSet() {
+        return offeredCourseSet;
+    }
+
+    public void setOfferedCourseSet(Set<OfferedCourse> offeredCourseSet) {
+        this.offeredCourseSet = offeredCourseSet;
     }
 }

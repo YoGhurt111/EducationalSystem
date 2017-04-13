@@ -1,5 +1,6 @@
 package com.shu.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -39,7 +40,7 @@ public class Teacher {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    @Column(name = "department_id")
     public String getDepartmentId() {
         return departmentId;
     }
