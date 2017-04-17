@@ -12,31 +12,34 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    @Autowired private StudentDao studentDao;
-    @Autowired private TeacherDao teacherDao;
-    @Autowired private AdminDao adminDao;
+    @Autowired
+    private StudentDao studentDao;
+    @Autowired
+    private TeacherDao teacherDao;
+    @Autowired
+    private AdminDao adminDao;
 
-    public boolean studentExist(String username, String pwd){
+    public boolean studentExist(String username, String pwd) {
         return !studentDao.selectStudent(username, pwd).isEmpty();
     }
 
-    public Student getStudent(String username, String pwd){
+    public Student getStudent(String username, String pwd) {
         return studentDao.selectStudent(username, pwd).get(0);
     }
 
-    public boolean teacherExist(String username, String pwd){
+    public boolean teacherExist(String username, String pwd) {
         return !teacherDao.selectTeacher(username, pwd).isEmpty();
     }
 
-    public Teacher getTeacher(String username, String pwd){
+    public Teacher getTeacher(String username, String pwd) {
         return teacherDao.selectTeacher(username, pwd).get(0);
     }
 
-    public boolean adminExist(String username, String pwd){
+    public boolean adminExist(String username, String pwd) {
         return !adminDao.selectAdmin(username, pwd).isEmpty();
     }
 
-    public Admin getAdmin(String username, String pwd){
+    public Admin getAdmin(String username, String pwd) {
         return adminDao.selectAdmin(username, pwd).get(0);
     }
 }

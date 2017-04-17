@@ -51,6 +51,26 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.web/jstl-impl -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jstl-impl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160810</version>
+        </dependency>
+
+
 
         <!--mysql驱动包-->
         <dependency>
@@ -174,7 +194,20 @@
 
     <build>
         <plugins>
-
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <!--Deploy to server-->
+                    <url>http://localhost:8080/manager/text</url>
+                    <server>Tomcat-8.0.29</server>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <path>/CrowFunding</path>
+                    <port>8080</port>
+                </configuration>
+            </plugin>
             <!-- 编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -186,5 +219,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

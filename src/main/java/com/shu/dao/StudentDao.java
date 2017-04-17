@@ -21,4 +21,9 @@ public class StudentDao extends BaseDao {
                 .list();
         return studentList;
     }
+
+    public Student getStudentById(String id){
+        Student student = this.getSesstion().get(Student.class,id);
+        return student;
+    }
 }

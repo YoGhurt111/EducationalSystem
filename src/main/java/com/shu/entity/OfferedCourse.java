@@ -20,7 +20,6 @@ public class OfferedCourse {
     private String courseLocation;
     private String courseTime;
     private int capacity;
-    private Set<Student> studentSet = new HashSet<Student>();
 
     @Id
     public int getId() {
@@ -112,13 +111,5 @@ public class OfferedCourse {
         result = 31 * result + (courseTime != null ? courseTime.hashCode() : 0);
         result = 31 * result + capacity;
         return result;
-    }
-
-    public Set<Student> getStudentSet() {
-        return studentSet;
-    }
-
-    public void setStudentSet(Set<Student> studentSet) {
-        this.studentSet = studentSet;
     }
 }
