@@ -8,16 +8,45 @@ import java.util.Set;
  * Created by Dell on 2017/4/9.
  */
 @Entity
-@Table(name = "student")
 public class Student {
     private String id;
     private String name;
     private String password;
-    private String departmentId;
+    private Department department;
+    private Set<STC> STCS = new HashSet<STC>();
+    private Set<GradePoints> gradePoints = new HashSet<GradePoints>();
 
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    public Set<GradePoints> getGradePoints() {
+        return gradePoints;
+    }
+
+    public void setGradePoints(Set<GradePoints> gradePoints) {
+        this.gradePoints = gradePoints;
+    }
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    public Set<STC> getSTCS() {
+        return STCS;
+    }
+
+    public void setSTCS(Set<STC> STCS) {
+        this.STCS = STCS;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "d_id")
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     @Id
-
+    @Column(name = "s_id")
     public String getId() {
         return id;
     }
@@ -42,37 +71,5 @@ public class Student {
         this.password = password;
     }
 
-    @Column(name = "department_id")
-    public String getDepartmentId() {
-        return departmentId;
-    }
 
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Student student = (Student) o;
-
-        if (id != null ? !id.equals(student.id) : student.id != null) return false;
-        if (name != null ? !name.equals(student.name) : student.name != null) return false;
-        if (password != null ? !password.equals(student.password) : student.password != null) return false;
-        if (departmentId != null ? !departmentId.equals(student.departmentId) : student.departmentId != null)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (departmentId != null ? departmentId.hashCode() : 0);
-        return result;
-    }
 }

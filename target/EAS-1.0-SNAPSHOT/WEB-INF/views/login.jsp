@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../statics/bootstrap-3.3.7-dist/css/bootstrap.css">
     <title>上海大学教务管理系统</title>
 
 </head>
@@ -72,7 +72,7 @@
                 $("#tips").html("提醒：您现在的身份是学生，请输入8位学号登录系统");
                 break;
             case "t":
-                $("p").html("提醒：您现在的身份是教师，请输入10位工号登录系统");
+                $("#tips").html("提醒：您现在的身份是教师，请输入10位工号登录系统");
                 break;
             case "a":
                 $("#tips").html("提醒：您现在的身份是管理员，请输入4位工号登录系统");
@@ -82,8 +82,8 @@
 </script>
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../statics/JQuery/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 </body>
 </html>

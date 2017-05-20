@@ -1,20 +1,30 @@
 package com.shu.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Dell on 2017/4/9.
  */
 @Entity
-@Table(name = "course")
 public class Course {
     private String id;
     private String name;
     private int credit;
+    private Set<TC> tcs = new HashSet<TC>();
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    public Set<TC> getTcs() {
+        return tcs;
+    }
+
+    public void setTcs(Set<TC> tcs) {
+        this.tcs = tcs;
+    }
 
     @Id
+    @Column(name = "c_id")
     public String getId() {
         return id;
     }
@@ -39,25 +49,4 @@ public class Course {
         this.credit = credit;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Course course = (Course) o;
-
-        if (credit != course.credit) return false;
-        if (id != null ? !id.equals(course.id) : course.id != null) return false;
-        if (name != null ? !name.equals(course.name) : course.name != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + credit;
-        return result;
-    }
 }

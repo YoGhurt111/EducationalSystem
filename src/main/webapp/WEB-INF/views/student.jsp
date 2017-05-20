@@ -11,9 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../statics/bootstrap-3.3.7-dist/css/bootstrap.css">
     <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="../statics/DataTables-1.10.13/media/css/jquery.dataTables.css">
     <title>上海大学教务管理系统:学生主页</title>
 
 </head>
@@ -28,14 +28,14 @@
     </div>
     <div class="row">
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="/student/">主页</a></li>
-            <li role="presentation" onclick=""><a href="">选课管理</a></li>
-            <li role="presentation" onclick=""><a href="">成绩查询</a></li>
-            <li role="presentation" onclick=""><a href="">课表查看</a></li>
-            <li role="presentation"><a href="/">退出</a></li>
+            <li role="presentation" class="active"><a href="">主页</a></li>
+            <li role="presentation"><a href="">选课管理</a></li>
+            <li role="presentation"><a href="/student/gradeTable">成绩查询</a></li>
+            <li role="presentation"><a href="/student/courseTable">课表查看</a></li>
+            <li role="presentation"><a href="/logout">退出</a></li>
         </ul>
     </div>
-    <div class="row">
+    <div id="summary" class="row">
         <div class="jumbotron">
             <h2 id="jName">姓名：</h2>
             <h2 id="jId">学号：</h2>
@@ -56,11 +56,11 @@
 </div>
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../statics/JQuery/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+<script src="../statics/DataTables-1.10.13/media/js/jquery.dataTables.js"></script>
 <script>
     $.ajax({
         url: '/student/data',
@@ -75,7 +75,35 @@
             $("#department").append(data.department);
         },
         error: function () {
-            alert('失败');
+            location.assign("/");
+        }
+    });
+
+    $.ajax({
+        url:'/ajax/term',
+        type:'get',
+        dataType:'json',
+        success:function (data) {
+            switch (data.term){
+                case "spring":
+                    $('#term').append("春季学期");
+                    break;
+                case "summer":
+                    $('#term').append("夏季学期");
+                    break;
+                case "autumn":
+                    $('#term').append("秋季学期");
+                    break;
+                case "winter":
+                    $('#term').append("冬季学期");
+                    break;
+                case "vacation":
+                    $('#term').append("放假中");
+                    break;
+            }
+        },
+        error:function () {
+            alert('读取学期数据失败');
         }
     });
 </script>
