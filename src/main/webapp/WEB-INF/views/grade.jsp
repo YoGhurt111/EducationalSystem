@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +15,7 @@
     <link rel="stylesheet" href="../statics/bootstrap-3.3.7-dist/css/bootstrap.css">
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="../statics/DataTables-1.10.13/media/css/jquery.dataTables.css">
-    <title>上海大学教务管理系统:学生主页</title>
+    <title>上海大学教务管理系统</title>
 
 </head>
 <body>

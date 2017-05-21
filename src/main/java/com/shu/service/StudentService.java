@@ -25,8 +25,6 @@ import java.util.Set;
 @Service
 public class StudentService {
     @Autowired
-    DepartmentDao departmentDao;
-    @Autowired
     StudentDao studentDao;
 
 
@@ -61,23 +59,23 @@ public class StudentService {
             //如果选课记录中前四位匹配当前年份，后若干位匹配当前学期，则匹配需求
             if (time.substring(0, 4).equals(getCurrentYear()) && time.substring(4).equals(term)) {
                 JSONObject json = new JSONObject();
-                json.put("no", str[i]);
+                json.put("no", nullCheck(str[i]));
                 i++;
                 Course course = stc.getTc().getCourse();
-                json.put("c_id", course.getId());
+                json.put("c_id", nullCheck(course.getId()));
                 json.put("c_name", nullCheck(course.getName()));
                 json.put("credit", nullCheck(course.getCredit()));
                 TC tc = stc.getTc();
                 String temp = tc.getTime();
                 json.put("time", "周"+nullCheck(temp.substring(0,1)+temp.substring(1))+"节");
-                json.put("location", tc.getLocation());
+                json.put("location", nullCheck(tc.getLocation()));
                 Teacher teacher = tc.getTeacher();
-                json.put("t_id", teacher.getId());
-                json.put("t_name", teacher.getName());
+                json.put("t_id", nullCheck(teacher.getId()));
+                json.put("t_name", nullCheck(teacher.getName()));
                 array.put(json);
             }
         }
-        return new JSONObject().put("data",array).toString();
+        return new JSONObject().put("data",nullCheck(array)).toString();
     }
 
     public String getGrade(String id){

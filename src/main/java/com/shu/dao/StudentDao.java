@@ -1,6 +1,7 @@
 package com.shu.dao;
 
 import com.shu.entity.Student;
+import com.shu.entity.Teacher;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;

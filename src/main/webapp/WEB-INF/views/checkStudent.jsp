@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Dell
-  Date: 2017/4/7
-  Time: 11:21
+  Date: 2017/5/21
+  Time: 16:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -22,41 +22,37 @@
 <div class="container">
     <div class="row">
         <h3 id="name"></h3>
-        <h5>身份：学生</h5>
-        <h5 id="id">学号：</h5>
+        <h5>身份：教师</h5>
+        <h5 id="id">工号：</h5>
         <h5 id="department">院系：</h5>
         <hr>
     </div>
     <div class="row">
         <ul class="nav nav-tabs">
-            <li role="presentation"><a href="/student">主页</a></li>
-            <li role="presentation"><a href="">选课管理</a></li>
-            <li role="presentation" class="active"><a href="">成绩查询</a></li>
-            <li role="presentation"><a href="/student/courseTable">课表查看</a></li>
+            <li role="presentation"><a href="/teacher">主页</a></li>
+            <li role="presentation"><a href="/teacher/courseList">所授课程</a></li>
+            <li role="presentation"><a href="">成绩评定</a></li>
+            <li role="presentation" class="active"><a href="">学生名单</a></li>
             <li role="presentation"><a href="/logout">退出</a></li>
         </ul>
     </div>
     <br>
     <br>
     <div class="row">
-        <table id="gradeTable" class="table table-striped table-bordered">
+        <table id="studentTable" class="table table-striped table-bordered">
             <thead>
             <tr>
                 <th>序号</th>
                 <th>课程编号</th>
                 <th>课程名称</th>
-                <th>教师号</th>
-                <th>教师姓名</th>
-                <th>学分</th>
-                <th>最终成绩</th>
-                <th>绩点</th>
+                <th>学生编号</th>
+                <th>学生姓名</th>
+                <th>所属院系</th>
             </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
-        <h4 id="total_credit">总学分：</h4>
-        <h4 id="a_gpa">平均绩点：</h4>
     </div>
     <div class="row" style="text-align: center; bottom: 10px; position: fixed">
         <i>
@@ -78,9 +74,8 @@
 <script src="../statics/DataTables-1.10.13/media/js/jquery.dataTables.js"></script>
 <script>
     $.ajax({
-        url: '/student/data',
-        type: 'post',
-        data: {},
+        url: '/teacher/data',
+        type: 'get',
         dataType: 'json',
         success: function (data) {
             $('#name').append(data.name);
@@ -88,6 +83,7 @@
             $("#jId").append(data.id);
             $('#id').append(data.id);
             $("#department").append(data.department);
+            $("#d_location").append(data.d_location);
         },
         error: function () {
             location.assign("/");
@@ -95,34 +91,21 @@
     });
 </script>
 <script>
-    var gradeTable = $('#gradeTable').DataTable({
+    var studentTable = $("#studentTable").dataTable({
         ajax:{
-            url:"/student/get_grade",
+            url:"/teacher/getStudentList",
             dataType:"json"
         },
-        columns: [
-            {"data": "no"},
-            {"data": "c_id"},
-            {"data": "c_name"},
-            {"data": "t_id"},
-            {"data": "t_name"},
-            {"data": "credit"},
-            {"data": "grade"},
-            {"data": "gpa"}
+        columns:[
+            {"data":"no"},
+            {"data":"c_id"},
+            {"data":"c_name"},
+            {"data":"s_id"},
+            {"data":"s_name"},
+            {"data":"department"}
         ]
-    });
-    $.ajax({
-        url:"/student/get_total_credit",
-        dataType:"json",
-        type:"get",
-        success:function (data) {
-            $("#total_credit").append(data.t_credit);
-            $("#a_gpa").append(data.gpa);
-        },
-        error:function () {
-            alert("读取总学分和平均绩点错误");
-        }
     });
 </script>
 </body>
 </html>
+

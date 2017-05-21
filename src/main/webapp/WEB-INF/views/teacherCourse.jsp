@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Dell
-  Date: 2017/4/7
-  Time: 11:21
+  Date: 2017/5/21
+  Time: 20:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -22,20 +22,21 @@
 <div class="container">
     <div class="row">
         <h3 id="name"></h3>
-        <h5>身份：学生</h5>
-        <h5 id="id">学号：</h5>
+        <h5>身份：教师</h5>
+        <h5 id="id">工号：</h5>
         <h5 id="department">院系：</h5>
         <hr>
     </div>
     <div class="row">
         <ul class="nav nav-tabs">
-            <li role="presentation"><a href="/student">主页</a></li>
-            <li role="presentation"><a href="">选课管理</a> </li>
-            <li role="presentation"><a href="/student/gradeTable">成绩查询</a></li>
-            <li role="presentation" class="active"><a href="">课表查看</a></li>
+            <li role="presentation"><a href="/teacher/">主页</a></li>
+            <li role="presentation" class="active"><a href="">所授课程</a></li>
+            <li role="presentation"><a href="">成绩评定</a></li>
+            <li role="presentation"><a href="/teacher/studentList">学生名单</a></li>
             <li role="presentation"><a href="/logout">退出</a></li>
         </ul>
     </div>
+    <br>
     <div class="row">
         <table id="courseList" class="table table-striped table-bordered">
             <thead>
@@ -43,8 +44,6 @@
                 <th>序号</th>
                 <th>课程编号</th>
                 <th>课程名称</th>
-                <th>教师号</th>
-                <th>教师姓名</th>
                 <th>上课时间</th>
                 <th>上课地点</th>
                 <th>学分</th>
@@ -200,9 +199,8 @@
 </script>
 <script>
     $.ajax({
-        url: '/student/data',
-        type: 'post',
-        data: {},
+        url: '/teacher/data',
+        type: 'get',
         dataType: 'json',
         success: function (data) {
             $('#name').append(data.name);
@@ -210,6 +208,7 @@
             $("#jId").append(data.id);
             $('#id').append(data.id);
             $("#department").append(data.department);
+            $("#d_location").append(data.d_location);
         },
         error: function () {
             location.assign("/");
@@ -220,7 +219,7 @@
 
     var cList = $('#courseList').dataTable({
         ajax:{
-            url:"/student/get_courseList"
+            url:"/teacher/getCourseList"
         },
         "oLanguage": {
             "sLengthMenu": "每页显示 _MENU_ 条记录",
@@ -239,8 +238,6 @@
             {"data": "no"},
             {"data": "c_id"},
             {"data": "c_name"},
-            {"data": "t_id"},
-            {"data": "t_name"},
             {"data": "time"},
             {"data": "location"},
             {"data": "credit"}
@@ -258,9 +255,9 @@
             }
         }
         for (var i=0; i<row; i++){
-            var day = list.cell(i,5).data().trim().substring(1,2);
-            var start = list.cell(i,5).data().trim().substring(2,3);
-            var end = list.cell(i,5).data().trim().substring(4,5);
+            var day = list.cell(i,3).data().trim().substring(1,2);
+            var start = list.cell(i,3).data().trim().substring(2,3);
+            var end = list.cell(i,3).data().trim().substring(4,5);
             switch(day){
                 case "一":
                     day = 1;
