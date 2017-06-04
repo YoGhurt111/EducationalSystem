@@ -30,7 +30,7 @@
     <div class="row">
         <ul class="nav nav-tabs">
             <li role="presentation"><a href="/student">主页</a></li>
-            <li role="presentation"><a href="">选课管理</a> </li>
+            <li role="presentation"><a href="/student/selectCourse">选课管理</a> </li>
             <li role="presentation"><a href="/student/gradeTable">成绩查询</a></li>
             <li role="presentation" class="active"><a href="">课表查看</a></li>
             <li role="presentation"><a href="/logout">退出</a></li>

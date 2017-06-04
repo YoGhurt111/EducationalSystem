@@ -1,7 +1,9 @@
 package com.shu.service;
 
 import com.shu.dao.DepartmentDao;
+import com.shu.dao.STCDao;
 import com.shu.dao.StudentDao;
+import com.shu.dao.TCDao;
 import com.shu.entity.*;
 import com.shu.util.GPACounter;
 import org.json.JSONArray;
@@ -26,6 +28,10 @@ import java.util.Set;
 public class StudentService {
     @Autowired
     StudentDao studentDao;
+    @Autowired
+    TCDao tcDao;
+    @Autowired
+    STCDao stcDao;
 
 
     public Department getDepartment(String studentId) {
@@ -146,5 +152,50 @@ public class StudentService {
         data.put("gpa", nullCheck(countGPA(totalGrade/count)));
         data.put("t_credit", nullCheck(totalCredit));
         return data.toString();
+    }
+
+    public String selectCourseStatus(String id, String jsonStr){
+        Student student = studentDao.getStudentById(id);
+        JSONObject jsonObject = new JSONObject(jsonStr);
+        Set<STC> stcs = student.getSTCS();
+        JSONObject time = new JSONObject(getCurrentTerm());
+        String term = time.get("term").toString();
+        for (STC stc : stcs){
+            if (stc.getTerm().substring(0,4).equals(getCurrentYear()) && stc.getTerm().substring(4).equals(term)){
+                if (repeatClass(stc.getTc().getTime(), jsonObject.get("time").toString())){
+                    return new JSONObject().put("status", "fail").toString();
+                }
+            }
+        }
+        TC tc = tcDao.getTCByTIdAndCId(jsonObject.get("t_id").toString(),
+                jsonObject.get("c_id").toString());
+        STC stc = new STC();
+        stc.setStudent(student);
+        stc.setTc(tc);
+        stc.setTerm(getCurrentYear() + term);
+        stcDao.insert(stc);
+        return new JSONObject().put("status", "success").toString();
+    }
+
+    private boolean repeatClass(String courseTime, String selectTime){
+        if (courseTime.substring(0,1).equals(selectTime.substring(1,2))){
+            int c_start = Integer.parseInt(courseTime.substring(1,2));
+            int c_end = Integer.parseInt(courseTime.substring(3,4));
+            int s_start = Integer.parseInt(selectTime.substring(2,3));
+            int s_end = Integer.parseInt(selectTime.substring(4,5));
+            if ((s_start >= c_start && s_start <= c_end) || (c_start >= s_start && c_start <= s_end)){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public String deleteSTC(String id, String jsonStr){
+        Student student = studentDao.getStudentById(id);
+        JSONObject jsonObject = new JSONObject(jsonStr);
+        TC tc = tcDao.getTCByTIdAndCId(jsonObject.get("t_id").toString(),
+                jsonObject.get("c_id").toString());
+        return stcDao.delete(student, tc);
     }
 }

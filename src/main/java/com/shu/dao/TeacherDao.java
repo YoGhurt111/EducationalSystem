@@ -21,6 +21,7 @@ public class TeacherDao extends BaseDao{
     }
 
     public Teacher getTeacherById(String id){
-        return this.getSesstion().get(Teacher.class, id);
+        Teacher teacher = this.getSesstion().get(Teacher.class, id);
+        return teacher;
     }
 }

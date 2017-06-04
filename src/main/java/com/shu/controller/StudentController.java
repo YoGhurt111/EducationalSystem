@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -22,6 +23,11 @@ public class StudentController {
     @RequestMapping(value = "")
     public String index() {
         return "student";
+    }
+
+    @RequestMapping(value = "/selectCourse")
+    public String selectCourse(){
+        return "selectCourse";
     }
 
     @RequestMapping(value = "/data",produces = "text/html;charset=utf-8")
@@ -60,5 +66,19 @@ public class StudentController {
     @ResponseBody
     public String getTCredit(@CookieValue(value = "id")String id){
         return studentService.getTotalCredit(id);
+    }
+
+    @RequestMapping(value = "/get_select_course",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String getSelectCourse(@CookieValue(value = "id")String id,@RequestParam(value = "jsonData") String data){
+        return studentService.selectCourseStatus(id, data);
+    }
+
+    @RequestMapping(value = "/deleteCourse",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String deleteCourse(@CookieValue(value = "id")String id,@RequestParam(value = "jsonData") String data){
+        String msg = studentService.deleteSTC(id, data);
+        System.out.println(msg);
+        return msg;
     }
 }

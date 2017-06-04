@@ -1,12 +1,15 @@
 package com.shu.entity;
 
+import org.omg.PortableInterceptor.ServerRequestInfo;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Dell on 2017/5/17.
  */
 @Entity
-public class GradePoints {
+public class GradePoints implements Serializable{
     private int g_id;
     private String term;
     private double gpa;
@@ -38,7 +41,7 @@ public class GradePoints {
         this.gpa = gpa;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "s_id")
     public Student getStudent() {
         return student;

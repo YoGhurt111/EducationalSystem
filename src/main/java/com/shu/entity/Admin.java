@@ -4,12 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * Created by Dell on 2017/4/9.
  */
 @Entity
-public class Admin {
+public class Admin implements Serializable{
     private String id;
     private String name;
     private String password;

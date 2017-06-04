@@ -18,4 +18,9 @@ public class AdminDao extends BaseDao{
                 .list();
         return adminList;
     }
+
+    public Admin getAdminById(String id){
+        Admin admin = this.getSesstion().get(Admin.class, id);
+        return admin;
+    }
 }

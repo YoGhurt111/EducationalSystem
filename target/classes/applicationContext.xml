@@ -66,6 +66,7 @@
         <tx:attributes>
             <tx:method name="get*" read-only="true" propagation="REQUIRED"/>
             <tx:method name="list*" read-only="true" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="find*" read-only="true" propagation="REQUIRED"/>
             <tx:method name="get*" read-only="true" propagation="REQUIRED"/>
             <tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>
@@ -74,7 +75,7 @@
 
 
     <aop:config proxy-target-class="true">
-        <aop:advisor pointcut="execution(public * com.shu.service.*Serice.*(..))" advice-ref="txAdvice"/>
+        <aop:advisor pointcut="execution(public * com.shu.service.*Service.*(..))" advice-ref="txAdvice"/>
     </aop:config>
 
 </beans>

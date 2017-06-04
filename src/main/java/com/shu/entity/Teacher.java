@@ -1,6 +1,7 @@
 package com.shu.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,14 +9,14 @@ import java.util.Set;
  * Created by Dell on 2017/4/9.
  */
 @Entity
-public class Teacher {
+public class Teacher implements Serializable{
     private String id;
     private String name;
     private String password;
     private Department department;
     private Set<TC> tcs = new HashSet<TC>();
 
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "teacher")
     public Set<TC> getTcs() {
         return tcs;
     }
@@ -34,7 +35,7 @@ public class Teacher {
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "d_id")
     public Department getDepartment() {
         return department;

@@ -4,6 +4,7 @@ import org.codehaus.jackson.map.annotate.JacksonInject;
 import org.hibernate.mapping.AuxiliaryDatabaseObject;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import java.util.Set;
  * Created by Dell on 2017/5/18.
  */
 @Entity
-public class TC {
+public class TC implements Serializable{
     private int tc_id;
     private String time;
     private String location;
@@ -19,7 +20,7 @@ public class TC {
     private Course course;
     private Set<STC> stcs = new HashSet<STC>();
 
-    @OneToMany(mappedBy = "tc",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tc")
     public Set<STC> getStcs() {
         return stcs;
     }
@@ -54,7 +55,7 @@ public class TC {
         this.location = location;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "t_id")
     public Teacher getTeacher() {
         return teacher;
@@ -64,7 +65,7 @@ public class TC {
         this.teacher = teacher;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "c_id")
     public Course getCourse() {
         return course;

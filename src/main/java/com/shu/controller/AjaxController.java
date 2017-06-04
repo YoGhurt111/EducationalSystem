@@ -1,8 +1,11 @@
 package com.shu.controller;
 
+import com.shu.service.UserService;
 import org.json.JSONObject;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.beans.SimpleBeanInfo;
@@ -17,6 +20,8 @@ import static com.shu.util.TermTools.getCurrentTerm;
 @RestController
 @RequestMapping(value = "ajax")
 public class AjaxController {
+    @Autowired
+    private UserService userService;
     /**
      * 通过比较当前月份与规定月份的比较获得学期数据
      * 3月-5月：春季学期
@@ -29,5 +34,17 @@ public class AjaxController {
     @RequestMapping(value = "/term")
     public String getTerm() {
         return getCurrentTerm();
+    }
+
+    @RequestMapping(value = "/test", produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String test(){
+        return userService.test();
+    }
+
+    @RequestMapping(value = "/getCourse", produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String getCourse(){
+        return userService.getTC();
     }
 }

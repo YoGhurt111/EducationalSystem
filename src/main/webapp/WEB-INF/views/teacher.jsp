@@ -24,7 +24,7 @@
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="">主页</a></li>
             <li role="presentation"><a href="/teacher/courseList">所授课程</a></li>
-            <li role="presentation"><a href="">成绩评定</a></li>
+            <li role="presentation"><a href="/teacher/updateGrade">成绩评定</a></li>
             <li role="presentation"><a href="/teacher/studentList">学生名单</a></li>
             <li role="presentation"><a href="/logout">退出</a></li>
         </ul>

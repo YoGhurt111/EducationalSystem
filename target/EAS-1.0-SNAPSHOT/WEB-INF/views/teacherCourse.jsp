@@ -31,7 +31,7 @@
         <ul class="nav nav-tabs">
             <li role="presentation"><a href="/teacher/">主页</a></li>
             <li role="presentation" class="active"><a href="">所授课程</a></li>
-            <li role="presentation"><a href="">成绩评定</a></li>
+            <li role="presentation"><a href="/teacher/updateGrade">成绩评定</a></li>
             <li role="presentation"><a href="/teacher/studentList">学生名单</a></li>
             <li role="presentation"><a href="/logout">退出</a></li>
         </ul>
@@ -47,6 +47,7 @@
                 <th>上课时间</th>
                 <th>上课地点</th>
                 <th>学分</th>
+                <th>选课人数</th>
             </tr>
             </thead>
             <tbody>
@@ -55,7 +56,7 @@
     </div>
     <br>
     <hr>
-    <button onclick="showCourseTable()">显示课程表</button>
+    <button onclick="showCourseTable()">显示排课表</button>
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             <table id="courseTable" class="table table-bordered table-hover table-responsive" hidden="hidden">
@@ -240,7 +241,8 @@
             {"data": "c_name"},
             {"data": "time"},
             {"data": "location"},
-            {"data": "credit"}
+            {"data": "credit"},
+            {"data": "number"}
         ]
     });
 

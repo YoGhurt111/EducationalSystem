@@ -1,12 +1,13 @@
 package com.shu.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Dell on 2017/5/11.
  */
 @Entity
-public class STC {
+public class STC implements Serializable{
     private int stc_id;
     private Double usualGrades;
     private Double finalGrades;
@@ -14,7 +15,7 @@ public class STC {
     private Student student;
     private TC tc;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tc_id")
     public TC getTc() {
         return tc;
@@ -60,7 +61,7 @@ public class STC {
         this.term = term;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "s_id")
     public Student getStudent() {
         return student;
